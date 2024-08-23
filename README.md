@@ -1,20 +1,7 @@
 # NetPulse Blockchain
 
 
-A fresh [NetPulse](https://NetPulse.io/) node, ready for hacking :rocket:
-
-A standalone version of this template is available for each release of Polkadot
-in the [NetPulse Developer Hub Parachain
-Template](https://github.com/NetPulse-developer-hub/NetPulse-parachain-template/)
-repository. The parachain template is generated directly at each Polkadot
-release branch from the [Node Template in
-NetPulse](https://github.com/paritytech/polkadot-sdk/tree/master/NetPulse/bin/node-template)
-upstream
-
-It is usually best to use the stand-alone version to start a new project. All
-bugs, suggestions, and feature requests should be made upstream in the
-[NetPulse](https://github.com/paritytech/polkadot-sdk/tree/master/NetPulse)
-repository.
+A fresh [NetPulse](https://NetPulse.social/) node, ready for hacking :rocket:
 
 ## Getting Started
 
