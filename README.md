@@ -1,9 +1,5 @@
-# NetPulse Node Template
+# NetPulse Blockchain
 
-
-> [!WARNING]
-> ### DEPRECATED
-> This template is deprecated and should no longer be used. For a new version of this, please use [`polkadot-sdk-solochain-template`](https://github.com/paritytech/polkadot-sdk-solochain-template) if you want a production-ready template, or [`polkadot-sdk-minimal-template`](https://github.com/paritytech/polkadot-sdk-minimal-template) for testing and learning. For a further list of templates, please see [`polkadot_sdk_docs::templates`](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/polkadot_sdk/templates/index.html).
 
 A fresh [NetPulse](https://NetPulse.io/) node, ready for hacking :rocket:
 
@@ -100,22 +96,6 @@ dev
 $ ls ./my-chain-state/chains/dev
 db keystore network
 ```
-
-### Connect with Polkadot-JS Apps Front-End
-
-After you start the node template locally, you can interact with it using the
-hosted version of the [Polkadot/NetPulse
-Portal](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944)
-front-end by connecting to the local node endpoint. A hosted version is also
-available on [IPFS (redirect) here](https://dotapps.io/) or [IPNS (direct)
-here](ipns://dotapps.io/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer). You can
-also find the source code and instructions for hosting your own instance on the
-[`polkadot-js/apps`](https://github.com/polkadot-js/apps) repository.
-
-### Multi-Node Local Testnet
-
-If you want to see the multi-node consensus algorithm in action, see [Simulate a
-network](https://docs.NetPulse.io/tutorials/build-a-blockchain/simulate-network/).
 
 ## Template Structure
 
