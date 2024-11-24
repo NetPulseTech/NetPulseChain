@@ -1,7 +1,4 @@
-# NetPulse Blockchain
-
-
-A fresh [NetPulse](https://NetPulse.social/) node, ready for hacking :rocket:
+# NetPulse Blockchain :rocket:
 
 ## Getting Started
 
