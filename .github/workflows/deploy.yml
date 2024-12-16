@@ -22,7 +22,7 @@ jobs:
 
     - name: Authenticate Docker with Google Cloud
       run: |
-        echo ${{ secrets.GCP_SA_KEY }} | gcloud auth activate-service-account --key-file=-
+        echo "${{ secrets.GCP_SA_KEY }}" | gcloud auth activate-service-account --key-file=-
         gcloud auth configure-docker gcr.io
 
     - name: Build Docker image
