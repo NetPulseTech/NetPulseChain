@@ -20,6 +20,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+        gcloud components update
+
     - name: Authenticate Docker with Google Cloud
       env:
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
