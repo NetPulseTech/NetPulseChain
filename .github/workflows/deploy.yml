@@ -21,8 +21,11 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
     - name: Authenticate Docker with Google Cloud
+      env:
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
       run: |
-        echo "${{ secrets.GCP_SA_KEY }}" | gcloud auth activate-service-account --key-file=-
+        echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
+        gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         gcloud auth configure-docker gcr.io
 
     - name: Build Docker image
