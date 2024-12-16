@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netpulse-deployment
+  labels:
+    app: netpulse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netpulse
+  template:
+    metadata:
+      labels:
+        app: netpulse
+    spec:
+      containers:
+      - name: netpulse
+        image: gcr.io/airy-coil-394706/netpulse:latest
+        ports:
+        - containerPort: 9930
+        - containerPort: 9333
+        - containerPort: 9944
+        - containerPort: 30333
+        - containerPort: 30334
