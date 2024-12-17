@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netpulse-deployment
+  name: netpulse-blockchain
   labels:
     app: netpulse
 spec:
