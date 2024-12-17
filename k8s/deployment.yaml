@@ -24,3 +24,10 @@ spec:
         - containerPort: 9944
         - containerPort: 30333
         - containerPort: 30334
+        resources:
+          requests:
+            cpu: 100m
+            memory: 2Gi
+          limits:
+            cpu: 500m
+            memory: 2Gi
