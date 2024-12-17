@@ -49,5 +49,5 @@ jobs:
 
     - name: Verify deployment
       run: |
-        kubectl rollout status default/netpulse-blockchain # Added "deployment/" prefix
-        kubectl get pods # Optional: List pods for more detailed status
+        kubectl rollout status deployment/netpulse-blockchain -n default
+        kubectl get pods -n default # Optional: List pods for detailed status
