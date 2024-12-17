@@ -33,7 +33,6 @@ jobs:
         gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         gcloud auth configure-docker gcr.io
 
-    # Uncomment these if you're building and pushing an image in the workflow
     # - name: Build Docker image
     #   run: |
     #     docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest -f Containerfile .
@@ -49,5 +48,5 @@ jobs:
 
     - name: Verify deployment
       run: |
-        kubectl rollout status deployment/netpulse-blockchain -n default
+        kubectl rollout status deployment/netpulse-deployment -n default
         kubectl get pods -n default # Optional: List pods for detailed status
