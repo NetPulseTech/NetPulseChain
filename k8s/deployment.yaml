@@ -1,3 +1,9 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netpulse-blockchain
+  labels:
+    app: netpulse
 spec:
   replicas: 1
   selector:
@@ -10,17 +16,17 @@ spec:
     spec:
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse:latest
+        image: gcr.io/airy-coil-394706/netpulse:latest # Replace with your image path
         ports:
         - containerPort: 9930
         - containerPort: 9333
         - containerPort: 9944
         - containerPort: 30333
         - containerPort: 30334
-        resources:
+        resources: # Recommended: Add resource requests and limits
           requests:
-            memory: "1Gi"
-            cpu: "1"
+            cpu: 100m # 0.1 CPU
+            memory: 256Mi
           limits:
-            memory: "2Gi"
-            cpu: "2"
+            cpu: 500m # 0.5 CPU
+            memory: 512Mi

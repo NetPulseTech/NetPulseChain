@@ -6,15 +6,15 @@ on:
       - main
 
 jobs:
-  build:
+  deploy: # Renamed job to 'deploy' for clarity
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3 # Use v3 for latest features
 
     - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2.1.2
+      uses: google-github-actions/setup-gcloud@v2
       with:
         version: 'latest'
         service_account_key: ${{ secrets.GCP_SA_KEY }}
@@ -33,6 +33,7 @@ jobs:
         gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         gcloud auth configure-docker gcr.io
 
+    # Uncomment these if you're building and pushing an image in the workflow
     # - name: Build Docker image
     #   run: |
     #     docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest -f Containerfile .
@@ -48,4 +49,5 @@ jobs:
 
     - name: Verify deployment
       run: |
-        kubectl rollout status default/netpulse-blockchain	
+        kubectl rollout status deployment/netpulse-blockchain # Added "deployment/" prefix
+        kubectl get pods # Optional: List pods for more detailed status
