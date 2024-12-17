@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: netpulse-blockchain
-  namespace: default # Replace with your desired namespace
+  namespace: default
   labels:
     app: netpulse
 spec:
@@ -12,13 +12,12 @@ spec:
       app: netpulse
   template:
     metadata:
-      namespace: default # Important: Match the Deployment's namespace
       labels:
         app: netpulse
     spec:
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse:latest # Replace with your actual image path
+        image: gcr.io/airy-coil-394706/netpulse:latest
         ports:
         - containerPort: 9930
         - containerPort: 9333
