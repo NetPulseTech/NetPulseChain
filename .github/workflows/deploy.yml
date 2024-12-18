@@ -1,52 +1,52 @@
-# name: Deploy to GKE
+name: Deploy to GKE
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   deploy: # Renamed job to 'deploy' for clarity
-#     runs-on: ubuntu-latest
+jobs:
+  deploy: # Renamed job to 'deploy' for clarity
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v3 # Use v3 for latest features
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3 # Use v3 for latest features
 
-#     - name: Set up Google Cloud SDK
-#       uses: google-github-actions/setup-gcloud@v2
-#       with:
-#         version: 'latest'
-#         service_account_key: ${{ secrets.GCP_SA_KEY }}
-#         project_id: ${{ secrets.GCP_PROJECT_ID }}
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        version: 'latest'
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-#     - name: Install gke-gcloud-auth-plugin
-#       run: |
-#         gcloud components install gke-gcloud-auth-plugin
-#         gcloud components update
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+        gcloud components update
 
-#     - name: Authenticate Docker with Google Cloud
-#       env:
-#         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-#       run: |
-#         echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
-#         gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-#         gcloud auth configure-docker gcr.io
+    - name: Authenticate Docker with Google Cloud
+      env:
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+      run: |
+        echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
+        gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+        gcloud auth configure-docker gcr.io
 
-#     # - name: Build Docker image
-#     #   run: |
-#     #     docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest -f Containerfile .
+    - name: Build Docker image
+      run: |
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest -f Containerfile .
 
-#     # - name: Push Docker image
-#     #   run: |
-#     #     docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
+    - name: Push Docker image
+      run: |
+        docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
 
-#     - name: Deploy to GKE
-#       run: |
-#         gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
-#         kubectl apply -f k8s/deployment.yaml
+    - name: Deploy to GKE
+      run: |
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
+        kubectl apply -f k8s/deployment.yaml
 
-#     - name: Verify deployment
-#       run: |
-#         kubectl rollout status deployment/netpulse-deployment -n default
-#         kubectl get pods -n default # Optional: List pods for detailed status
+    - name: Verify deployment
+      run: |
+        kubectl rollout status deployment/netpulse-deployment -n default
+        kubectl get pods -n default # Optional: List pods for detailed status
