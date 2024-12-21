@@ -13,23 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Authenticate with Google Cloud
+    # Authenticate to Google Cloud with service account JSON
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-    # Set up gcloud CLI
+    # Set up Google Cloud SDK
     - name: Set up Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         install_components: gke-gcloud-auth-plugin
-
-    # Authenticate Docker to push images to Google Container Registry (if needed)
-    - name: Authenticate Docker with GCR
-      run: |
-        gcloud auth configure-docker gcr.io
 
     # Deploy to GKE
     - name: Deploy to GKE
