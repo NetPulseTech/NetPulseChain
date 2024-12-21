@@ -15,11 +15,9 @@ spec:
       labels:
         app: netpulse
     spec:
-      # Uncomment and set the correct service account if needed
-      # serviceAccountName: 115873905373554535626
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse
+        image: gcr.io/airy-coil-394706/netpulse:latest
         ports:
         - containerPort: 9930
         - containerPort: 9333
