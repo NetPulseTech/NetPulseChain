@@ -15,7 +15,7 @@ spec:
       labels:
         app: netpulse
     spec:
-      serviceAccountName: netpulse@airy-coil-394706.iam.gserviceaccount.com
+      serviceAccountName: netpulse
       containers:
       - name: netpulse
         image: gcr.io/airy-coil-394706/netpulse:latest
