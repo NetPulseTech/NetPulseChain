@@ -6,34 +6,46 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy: # Renamed job to 'deploy' for clarity
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3 # Use v3 for latest features
 
-    # Authenticate to Google Cloud with service account JSON
-    - name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-
-    # Set up Google Cloud SDK
-    - name: Set up Google Cloud CLI
+    - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
       with:
+        version: 'latest'
         project_id: ${{ secrets.GCP_PROJECT_ID }}
-        install_components: gke-gcloud-auth-plugin
 
-    # Deploy to GKE
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+        gcloud components update
+
+    - name: Authenticate Docker with Google Cloud
+      env:
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+      run: |
+        echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
+        gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+        gcloud auth configure-docker gcr.io
+
+    # - name: Build Docker image
+    #   run: |
+    #     docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest -f Containerfile .
+
+    # - name: Push Docker image
+    #   run: |
+    #     docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
+
     - name: Deploy to GKE
       run: |
-        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }}
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
         kubectl apply -f k8s/deployment.yaml
 
-    # Verify deployment
     - name: Verify deployment
       run: |
-        kubectl rollout status deployment/netpulse-blockchain
-        kubectl get pods
+        kubectl rollout status deployment/netpulse-deployment -n default
+        kubectl get pods -n default # Optional: List pods for detailed status
