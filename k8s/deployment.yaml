@@ -15,10 +15,10 @@ spec:
       labels:
         app: netpulse
     spec:
+      serviceAccountName: netpulse@airy-coil-394706.iam.gserviceaccount.com
       containers:
       - name: netpulse
         image: gcr.io/airy-coil-394706/netpulse:latest
-        imagePullPolicy: Always
         ports:
         - containerPort: 9930
         - containerPort: 9333
