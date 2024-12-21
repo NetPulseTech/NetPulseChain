@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse:latest
+        image: gcr.io/airy-coil-394706/netpulse
         ports:
         - containerPort: 9930
         - containerPort: 9333
