@@ -19,7 +19,7 @@ spec:
       # serviceAccountName: 115873905373554535626
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse:latest
+        image: gcr.io/airy-coil-394706/netpulse:af6483f8ac18
         ports:
         - containerPort: 9930
         - containerPort: 9333
