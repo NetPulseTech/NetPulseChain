@@ -15,12 +15,11 @@ spec:
       labels:
         app: netpulse
     spec:
-      # serviceAccountName: 115873905373554535626 
+      # Uncomment and set the correct service account if needed
+      # serviceAccountName: 115873905373554535626
       containers:
       - name: netpulse
         image: gcr.io/airy-coil-394706/netpulse:latest
-      imagePullSecrets:
-      - name: gcr-key
         ports:
         - containerPort: 9930
         - containerPort: 9333
@@ -34,3 +33,5 @@ spec:
           limits:
             cpu: 500m
             memory: 2Gi
+      imagePullSecrets:
+      - name: gcr-key
