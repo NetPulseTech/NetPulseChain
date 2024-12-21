@@ -30,7 +30,7 @@ jobs:
       run: |
         echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
         gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-        gcloud auth configure-docker gcr.io
+        gcloud auth configure-docker gcr.io --quiet
 
     # - name: Build Docker image
     #   run: |
