@@ -6,31 +6,26 @@ on:
       - main
 
 jobs:
-  deploy: # Renamed job to 'deploy' for clarity
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3 # Use v3 for latest features
+      uses: actions/checkout@v3
 
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
       with:
         version: 'latest'
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-    - name: Install gke-gcloud-auth-plugin
-      run: |
-        gcloud components install gke-gcloud-auth-plugin
-        gcloud components update
-
-    - name: Authenticate Docker with Google Cloud
+    - name: Authenticate with Google Cloud
       env:
-        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
       run: |
-        echo "$GCP_SA_KEY" > ${HOME}/gcloud-service-key.json
-        gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+        echo "${{ secrets.GCP_SA_KEY }}" > "${{ runner.temp }}/gcloud-key.json"
+        gcloud auth activate-service-account --key-file="${{ runner.temp }}/gcloud-key.json"
+        gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
         gcloud auth configure-docker gcr.io
 
     # - name: Build Docker image
@@ -49,4 +44,4 @@ jobs:
     - name: Verify deployment
       run: |
         kubectl rollout status deployment/netpulse-blockchain -n default
-        kubectl get pods -n default # Optional: List pods for detailed status
+        kubectl get pods -n default
