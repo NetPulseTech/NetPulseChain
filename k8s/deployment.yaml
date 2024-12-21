@@ -32,4 +32,4 @@ spec:
             cpu: 500m
             memory: 2Gi
       imagePullSecrets:
-      - name: gcr-key
+      - name: gcr-secret
