@@ -18,8 +18,8 @@ spec:
       serviceAccountName: netpulse-sa
       containers:
       - name: netpulse
-        imagePullPolicy: IfNotPresent
         image: gcr.io/airy-coil-394706/netpulse:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9930
         - containerPort: 9333
@@ -33,3 +33,5 @@ spec:
           limits:
             cpu: 500m
             memory: 2Gi
+        command: ["/target/release/Netpulse"]
+        args: ["--dev"]
