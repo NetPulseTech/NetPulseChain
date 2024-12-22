@@ -33,5 +33,3 @@ spec:
           limits:
             cpu: 500m
             memory: 2Gi
-        command: ["/target/release/Netpulse"]
-        args: ["--dev"]
