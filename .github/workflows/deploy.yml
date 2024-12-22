@@ -32,15 +32,15 @@ jobs:
         gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
         gcloud auth configure-docker gcr.io --quiet
 
-    - name: Build Docker image
-      run: |
-        IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
-        docker build -t $IMAGE -f Containerfile .
+    # - name: Build Docker image
+    #   run: |
+    #     IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
+    #     docker build -t $IMAGE -f Containerfile .
 
-    - name: Push Docker image
-      run: |
-        IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
-        docker push $IMAGE
+    # - name: Push Docker image
+    #   run: |
+    #     IMAGE=gcr.io/${{ secrets.GCP_PROJECT_ID }}/netpulse:latest
+    #     docker push $IMAGE
 
     - name: Deploy to GKE
       run: |

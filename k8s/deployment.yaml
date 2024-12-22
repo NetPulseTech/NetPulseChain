@@ -18,8 +18,8 @@ spec:
       serviceAccountName: netpulse-sa
       containers:
       - name: netpulse
-        image: gcr.io/airy-coil-394706/netpulse:latest
         imagePullPolicy: IfNotPresent
+        image: gcr.io/airy-coil-394706/netpulse:latest
         ports:
         - containerPort: 9930
         - containerPort: 9333
