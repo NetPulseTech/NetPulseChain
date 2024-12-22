@@ -15,10 +15,11 @@ spec:
       labels:
         app: netpulse
     spec:
+      serviceAccountName: netpulse-sa
       containers:
       - name: netpulse
         imagePullPolicy: IfNotPresent
-        image: gcr.io/airy-coil-394706/netpulse@sha256:b283c3fc455e62190658dde0d3684c31bc418ed1cd4f10b061aa79e007788544
+        image: gcr.io/airy-coil-394706/netpulse:latest
         ports:
         - containerPort: 9930
         - containerPort: 9333
@@ -32,5 +33,3 @@ spec:
           limits:
             cpu: 500m
             memory: 2Gi
-      imagePullSecrets:
-      - name: gcr-key
