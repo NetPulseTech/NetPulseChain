@@ -60,4 +60,5 @@ USER netpulse
 EXPOSE 9930 9333 9944 30333 30334
 
 # Run the binary
-CMD ["/usr/bin/Netpulse" , "--dev"]
+CMD ["/usr/bin/Netpulse", "--dev"]
+
